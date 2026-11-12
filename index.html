@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Material Shadow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top">
+    <div>
+      <h1>Material Shadow</h1>
+      <p class="sub">Open the charger. Carry what you find.</p>
+    </div>
+    <nav>
+      <button id="putDown" type="button">Put it down</button>
+      <button id="aboutBtn" type="button">About</button>
+    </nav>
+  </header>
+
+  <!-- text about the node you are pointing at -->
+  <aside id="panel" aria-live="polite">
+    <p id="panelKind" class="kind"></p>
+    <h2 id="panelTitle"></h2>
+    <p id="panelText"></p>
+    <p id="panelSource" class="source"></p>
+    <p id="panelHint" class="hint"></p>
+  </aside>
+
+  <!-- how much you are carrying -->
+  <div id="load">
+    <span>load</span>
+    <div class="bar"><div id="loadFill"></div></div>
+    <span class="small">symbolic</span>
+  </div>
+
+  <!-- short message after "Put it down" -->
+  <p id="message"></p>
+
+  <!-- About overlay -->
+  <section id="about" hidden>
+    <div class="aboutInner">
+      <button id="closeAbout" type="button" aria-label="Close">Close</button>
+      <h2>About</h2>
+      <p>
+        <em>Material Shadow</em> starts from the universal charger I took apart for Project 0.
+        Each click opens one layer of what the object depends on: its parts, the materials inside them,
+        the places those materials come from, and what is left behind there.
+      </p>
+      <p>
+        The work combines two strategies from this week's session. Like <em>Infrastructure of a Migratory Bird</em>,
+        it maps a network instead of a single object. Like <em>Rare Earthenware</em>, it gives the hidden cost a felt form:
+        the more you open, the heavier your cursor becomes. It lags behind your hand and sinks, so even clicking gets harder.
+      </p>
+      <p>
+        The weight is <strong>symbolic</strong>. It grows with each layer you open, not with real tonnage.
+        The facts in the text come from the sources listed below, and each node shows its own source.
+        The charger itself is small; most of what it costs is somewhere else.
+      </p>
+      <h3>Sources</h3>
+      <ul id="sourceList"></ul>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="data.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

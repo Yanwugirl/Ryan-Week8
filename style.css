@@ -1,0 +1,156 @@
+/* style.css — simple layout around the p5 canvas */
+
+:root {
+  --paper: #f3f0e8;
+  --ink: #1d1c1a;
+  --grey: #8a867d;
+  --line: #c9c4b8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* the p5 canvas sits behind everything */
+main {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+canvas {
+  display: block;
+  cursor: none;          /* we draw our own heavy cursor */
+}
+
+/* everything else sits above the canvas */
+.top, #panel, #load, #message { z-index: 2; }
+#about { z-index: 3; }
+
+.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px;
+  pointer-events: none;   /* let clicks pass through to the canvas */
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.sub { margin: 2px 0 0; color: var(--grey); }
+
+nav { pointer-events: auto; display: flex; gap: 8px; }
+
+button {
+  font: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+button:hover { background: var(--ink); color: var(--paper); }
+
+#panel {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  width: 360px;
+  max-width: calc(100vw - 48px);
+  pointer-events: auto;
+  background: rgba(243, 240, 232, 0.92);
+  padding: 4px 0;
+}
+
+#panel h2 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#panel p { margin: 0 0 8px; }
+.kind { color: var(--grey); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; }
+.source { color: var(--grey); font-size: 12px; }
+.source a { color: var(--grey); }
+.hint { font-size: 12px; }
+
+#load {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  pointer-events: none;
+}
+#load .bar { width: 120px; height: 6px; border: 1px solid var(--ink); }
+#loadFill { height: 100%; width: 0%; background: var(--ink); transition: width 0.4s; }
+#load .small { color: var(--grey); }
+
+#message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  max-width: 80vw;
+  text-align: center;
+  font-size: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s;
+  background: var(--paper);
+  padding: 8px 12px;
+}
+#message.show { opacity: 1; }
+
+#about {
+  position: fixed;
+  inset: 0;
+  background: rgba(243, 240, 232, 0.97);
+  overflow-y: auto;
+  cursor: auto;
+}
+.aboutInner {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 72px 24px 48px;
+  position: relative;
+}
+#closeAbout { position: absolute; top: 24px; right: 24px; }
+#about h2 { font-size: 18px; font-weight: 500; }
+#about h3 { font-size: 14px; font-weight: 500; margin-top: 28px; }
+#about ul { padding-left: 18px; font-size: 12px; }
+#about li { margin-bottom: 6px; }
+#about a { color: var(--ink); }
+
+button { white-space: nowrap; }
+
+/* phones: panel takes the bottom of the screen, load meter sits under the title */
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  .top { padding: 16px; gap: 12px; }
+  h1 { font-size: 16px; }
+  .sub { font-size: 12px; }
+  button { padding: 5px 8px; font-size: 12px; }
+  #panel { left: 16px; right: 16px; bottom: 16px; width: auto; max-width: none; }
+  #panel h2 { font-size: 15px; }
+  #load { left: 16px; right: auto; bottom: auto; top: 88px; }
+  #load .bar { width: 90px; }
+}
